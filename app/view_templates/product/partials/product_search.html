@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Products</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="/static/css/style.css"> <!-- Ensure path is correct -->
+    <!-- HTMX CDN -->
+    <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+</head>
+<body>
+    <!-- Search container -->
+    <div class="search-container">
+        <!-- Search input field -->
+        <input type="text" id="search-input" placeholder="Search for products..." 
+               hx-get="/product/search/"
+               hx-target="#search-results"
+               hx-trigger="input"
+               name="query"
+               autocomplete="off" 
+               />
+
+        <!-- Dropdown for search results -->
+        <div id="search-dropdown" class="search-dropdown" style="display:none;">
+            <ul id="search-results" class="search-results">
+                <!-- Results will be dynamically injected by HTMX -->
+                <ul id="search-results" class="list-group">
+                    {% for product in results %}
+                        <li class="list-group-item">
+                            <a href="/product/{{ product.id }}">
+                                <img src="{{ product.thumbnail }}" alt="{{ product.name }}" width="50" height="50">
+                                {{ product.name }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item">No results found</li>
+                    {% endfor %}
+                </ul>
+            
+                 
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("search-input").addEventListener("input", function () {
+                let dropdown = document.getElementById("search-dropdown");
+                let searchResults = document.getElementById("search-results");
+        
+                // Check if results exist
+                if (searchResults.children.length > 0) {
+                    dropdown.style.display = "block";
+                } else {
+                    dropdown.style.display = "none";
+                }
+            });
+        
+            // Hide dropdown when clicking outside
+            document.addEventListener("click", function (event) {
+                let dropdown = document.getElementById("search-dropdown");
+                let searchInput = document.getElementById("search-input");
+        
+                if (!searchInput.contains(event.target) && !dropdown.contains(event.target)) {
+                    dropdown.style.display = "none";
+                }
+            });
+        });
+    </script>
+        
+</body>
+</html>

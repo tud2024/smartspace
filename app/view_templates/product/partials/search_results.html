@@ -1,0 +1,17 @@
+<ul class="list-group">
+    {% for product in results %}
+        <li class="list-group-item">
+            <a href="/product/{{ product.id }}" class="d-flex align-items-start text-decoration-none" style="gap: 1rem;">
+                <img src="{{ product.thumbnail }}" alt="{{ product.name }}" width="60" height="60" class="me-2">
+                <div class="flex-grow-1 d-flex flex-column justify-content-between">
+                    <span>{{ product.name }}</span>
+                    <p class="text-muted mb-0" style="white-space: normal; word-wrap: break-word;">{{ product.description|truncate(50) }}</p>
+                </div>
+                <p class="fw-bold text-danger mb-0 ms-auto" style="text-align: left;">€{{ "%.2f"|format(product.price) }}</p>
+
+            </a>
+        </li>
+    {% else %}
+        <li class="list-group-item text-muted">No results found</li>
+    {% endfor %}
+</ul>

@@ -45,13 +45,19 @@ def dataGetProduct(id):
         .select("*, category(name)")
         .eq("id", id)
         .execute()
+    
     )
     return response.data[0]
 
+
 # update product
-def dataUpdateProduct(product: Product) :
-    # pass params individually
-    #response = supabase.table("product").upsert({"id": product.id, "category_id": product.category_id, "title": product.title, "thumbnail": product.thumbnail, "stock": product.stock, "price": product.price}).execute()
+def dataUpdateProduct(product: Product,accessToken, refreshToken) :
+    supabase.auth.set_session(accessToken, refreshToken)
+    # get the authenticted user
+    auth_user = supabase.auth.get_user()
+    # print the user id
+    print('user id: ', auth_user.user.id)
+
     response = (
         supabase.table("product")
         .upsert(product.model_dump()) # convert product object to dict - required by Supabase
@@ -60,6 +66,9 @@ def dataUpdateProduct(product: Product) :
     # result is 1st item in the list
     return response.data[0]
 
+    
+    
+
 # add product, accepts product object
 def dataAddProduct(product: Product, accessToken, refreshToken) :
 
@@ -67,13 +76,16 @@ def dataAddProduct(product: Product, accessToken, refreshToken) :
 
     # get the authenticted user
     auth_user = supabase.auth.get_user()
-    # print the user id
-    print('user id: ', auth_user.user.id)
+    # print the user id for debugging purposes.
+    # print('user id: ', auth_user.user.id)
+    user_id= auth_user.user.id
+    product_data = product.dict()  # Convert the Pydantic model to a dictionary
+    product_data['user_id'] = user_id
 
     response = (
         supabase
         .table("product")
-        .insert(product.model_dump()) # convert product object to dict - required by Supabase
+        .insert(product_data) # convert product object to dict - required by Supabase
         .execute()
     )
 
@@ -135,3 +147,31 @@ def dataGetUserSession():
 def dataUserRegister(user):
     response = supabase.auth.sign_up(user.model_dump())
     return response
+
+def Data_Search(query: str, search_type: str = "word", category_name: str = None):
+    """Fetches search results from Supabase based on search type and category name."""
+    
+    query_filter = supabase.table("product").select("*")
+
+    # Apply category filter if category_name is provided
+    if category_name:
+        query_filter = query_filter.eq("category.name", category_name)  # Assuming category.name exists
+
+    # Apply search type filters
+    if search_type == "alphabet":
+        query_filter = query_filter.ilike("title", f"{query}%")  # Titles starting with `query`
+    
+    elif search_type == "multiple":
+        query_filter = query_filter.or_(
+            f"title.ilike.%{query[0]}%,title.ilike.%{query[1]}%"  # Multiple letter match
+        )
+    
+    elif search_type == "word":
+        query_filter = query_filter.ilike("title", f"%{query}%")  # Partial word match
+    
+    else:
+        return {"error": "Invalid search type"}
+
+    # Execute the query and return the results
+    response = query_filter.execute()
+    return response.data  # Return raw database results

@@ -1,0 +1,72 @@
+/* Ensure search container is positioned correctly */
+.search-container {
+    position: relative;
+}
+
+/* Search dropdown styling */
+#search-dropdown {
+    position: absolute;
+    top: 100%;  /* Places it directly below the search input */
+    left: 0;
+    right: 0;
+    max-height: 1000px;  /* Limit the dropdown height */
+    max-width: 700px;  /* Limit the dropdown height */
+    overflow-y: auto;   /* Allow scrolling when there are many results */
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;      /* Ensure it appears above other elements */
+    display: none;      /* Initially hide the dropdown */
+
+}
+
+.search-results li {
+    padding: 0.625rem;  /* 10px in rem */
+    margin-bottom: 0.3125rem;  /* 5px in rem */
+    border-bottom: 0.0625rem solid #ccc;  /* 1px in rem */
+    cursor: pointer;
+}
+
+#search-input {
+    width: 100%;
+    max-width: 700px;  /* Make input field take full width of the container */
+    
+}
+
+.search-results {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+}
+#search-dropdown li:hover {
+    background-color: #87CEFA;  /* Light background on hover */
+    color: white;  /* Optional: Change text color when hovered */
+}
+
+.search-results li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+
+
+
+.search-results img {
+    margin-right: 10px;
+}
+
+a span {
+    display: inline-block;
+    color: black;
+    font-size: 16px;
+}
+
+
+@media (max-width: 768px) {
+    #search-input {
+        width: 90%;  /* On smaller screens, take 90% of the container width */
+    }
+
+    
+}

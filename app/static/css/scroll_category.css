@@ -1,0 +1,64 @@
+/* Container for the category bar */
+.category-nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+    position: relative;
+    margin: 20px auto; /* Center within the page */
+    width: fit-content; /* Adjust width to fit content */
+    max-width: 100%;
+}
+
+/* Arrows - plain style, centered vertically */
+.arrow {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: black; /* Adjust for visibility */
+    cursor: pointer;
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.left-arrow {
+    left: 0; /* Positioned to the left */
+}
+
+.right-arrow {
+    right: 0; /* Positioned to the right */
+}
+
+/* Scrollable Categories */
+.category-nav {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
+    width: 100%;
+    padding-bottom: 10px;  /* Optional: Add space for the arrow buttons */
+}
+
+.category-nav::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in Chrome/Safari/Opera */
+}
+
+.cat-link {
+    flex: 0 0 auto;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    background-color: #f1f1f1;
+    margin-right: 5px;
+    border-radius: 5px;
+    white-space: nowrap; /* Prevents text wrapping */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .arrow {
+        display: block; /* Arrows visible for smaller screens */
+    }
+}

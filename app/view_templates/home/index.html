@@ -4,38 +4,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% include "common/head.html" ignore missing with context %}
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, proxy-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+
+    {% include "./common/head.html" ignore missing with context %}
+    
     <title>Home Page</title>
 </head>
 
 <body>
     <!-- include navbar from partials -->
-    {% include "common/nav.html" ignore missing with context %}
+    {% include "./common/nav.html" ignore missing with context %}
+    
+    <!-- Main Content (Categories, Products, etc.) -->
+    <div class="container-category ms-auto gap-3">
+        <div class="category-nav-container">
+            <!-- Left Arrow -->
+            <button class="arrow left-arrow" id="leftArrow">‹</button>
+    
+            <!-- Category Navigation (Scroll Area) -->
+            <div class="category-nav" id="categoryNav">
+                {% for category in categories %}
+                    <a class="cat-link" href="#" hx-get="/product/bycat/{{ category.id }}" hx-target="#productList" hx-swap="innerHTML" hx-trigger="click">
+                        {{ category.name }}
+                    </a>
+                {% endfor %}
+            </div>
+    
+            <!-- Right Arrow -->
+            <button class="arrow right-arrow" id="rightArrow">›</button>
+        </div>
+        
+        
+        <!-- Breadcrumb Bar 
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                {% if category %}
+                    <li class="breadcrumb-item"><a href="/category/{{ category.id }}">{{ category.name }}</a></li>
+                {% endif %}
+            </ol>
+        </nav>-->
+        
+            
+        
+        
+        
+        <div class="container mt-4">
+            <div class="product-list" id="productList">
+                {% for product in products %}
+                    <div class="product-card mb-4">
+                        <div class="card shadow-sm rounded bg-white d-flex flex-row">
+                            <!-- Left: Product Image -->
+                            <div class="product-image" style="padding: 10px; display: inline-block; border: 1px solid #ddd; border-radius: 8px;">
+                                <img src="{{ product.thumbnail }}" alt="{{ product.name }}" class="img-fluid rounded" style="width: 100px; height: 100px; object-fit: contain;">
+                            </div>
+                            
 
-    <h1>Dynamic content examples</h1>
+                            <!-- Middle: Product Details -->
+                            <div class="product-details p-4 flex-grow-1">
+                                <h5 class="fw-bold">{{ product.title}}</h5>
+                                <p class="text-muted">{{ product.category }}</p>
+                                <p class="text-muted">{{ product.description }}</p>
+                            </div>
 
-    <div class="m-5">
-        <h3> </> htmx button example</h3>
-        <!-- have a button POST a click via AJAX -->
-        <button hx-post="/clicked" hx-swap="outerHTML" class="btn btn-primary">
-            Click Me
-        </button>
+                            <!-- Right: Price & Action Buttons -->
+                            <div class="product-price p-4 text-end">
+                                <p class="fw-bold text-danger fs-4 mb-2">€{{ product.price }}</p>
+                                <div class="d-flex flex-column">
+                                    <button class="btn btn-outline-secondary mb-2"
+                                     hx-get="/product/{{ product.id }}"
+                                     hx-target="#productDetails" hx-swap="innerHTML"
+                                     hx-trigger="click">View Product</button>
+
+                                    <!-- Add to Cart Button -->
+                                    <button class="btn btn-warning">Add to Basket</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+          
+        <div class="container">
+            <div class="container-category ms-auto gap-3">
+                {% include "./common/footer.html" ignore missing with context %}                   
+            </div>
+        </div>
+        
+        
+
     </div>
-
-
-    <div class="m-5 timeBlock">
-        <h3>Server Time:</h3>
-        <h4 id="serverTime" hx-get="/server_time" hx-trigger="every 10s" hx-swap="innerHTML">{{serverTime}}</h4>
-    </div>
-
-    <div class="m-5 timeBlock">
-        <h3>Browser Time:</h3>
-        <h4 id="browserTime"></h4>
-    </div>
-
+    
     <!-- Load common CSS and JS -->
-    {% include "common/dependencies.html" ignore missing with context %}
-    <script src="/static/js/browserTime.js"></script>
+    {% include "./common/dependencies.html" ignore missing with context %}   
+    
+
 </body>
 
 </html>

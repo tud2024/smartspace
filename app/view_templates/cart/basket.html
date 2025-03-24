@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Basket</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"/>  
+    <link rel="stylesheet" href="/static/css/style.css?v=1.0">   
+    
+</head>
+<body>
+
+    <header>
+        <a href="/product" class ="logo">SmartSpace</a>
+        
+        <div id="cart-icon">
+            <i class="ri-shopping-bag-line"></i>
+            <span class="cart-item-count"></span>
+        </div>
+    </header>
+    <div class="cart">
+        <h2 class="cart-title">Cart</h2>
+        <div class="cart-content">
+            <!--<div class="cart-box">
+                <img src="/static/images/product/2.png" class="cart-img">
+                <div class="cart-detail">
+                    <h2 class="cart-product-title">Casual chair </h2>
+                    <span class="cart-price">€100</span>
+                    <div class="cart-quantity">
+                        <button id="decrement">-</button>
+                        <span class="number">1</span>
+                        <button id="increment">+</button>
+                    </div>
+                </div>
+                <i class="ri-delete-bin-line cart-remove"></i>
+            </div>-->
+        </div>
+        <div class="total">
+            <div class="total-title">Total</div>
+            <div class="total-price">€0</div>            
+        </div>
+        <div class="btn-buy">Buy Now</div>
+        <i class="ri-close-circle-line" id="cart-close"></i>
+
+    </div>
+    <section class ="shop">
+        <h1 class="section-title">Shop Products</h1>
+        <div class="product-content">
+            <div class="product-box">
+                <div class="img-box">
+                    <img src="/static/images/product/1.png" alt="chair">                    
+                </div>
+                <h2 class="product-title">chair-1</h2>
+                <div class="price-and-cart">
+                    <span class="price">€250</span>
+                    <i class="ri-shopping-bag-line add-cart"></i>
+                </div>
+            </div>
+            <div class="product-box">
+                <div class="img-box">
+                    <img src="/static/images/product/2.png" alt="chair">                    
+                </div>
+                <h2 class="product-title">chair-2</h2>
+                <div class="price-and-cart">
+                    <span class="price">€200</span>
+                    <i class="ri-shopping-bag-line add-cart"></i>
+                </div>
+            </div>
+            <div class="product-box">
+                <div class="img-box">
+                    <img src="/static/images/product/3.png" alt="chair">                    
+                </div>
+                <h2 class="product-title">chair-3</h2>
+                <div class="price-and-cart">
+                    <span class="price">€195</span>
+                    <i class="ri-shopping-bag-line add-cart"></i>
+                </div>
+            </div>
+            <div class="product-box">
+                <div class="img-box">
+                    <img src="/static/images/product/4.png" alt="chair">                    
+                </div>
+                <h2 class="product-title">chair-4</h2>
+                <div class="price-and-cart">
+                    <span class="price">€150</span>
+                    <i class="ri-shopping-bag-line add-cart"></i>
+                </div>
+            </div>
+            <div class="product-box">
+                <div class="img-box">
+                    <img src="/static/images/product/5.png" alt="chair">                    
+                </div>
+                <h2 class="product-title">chair-5</h2>
+                <div class="price-and-cart">
+                    <span class="price">€180</span>
+                    <i class="ri-shopping-bag-line add-cart"></i>
+                </div>
+            </div>
+            <div class="product-box">
+                <div class="img-box">
+                    <img src="/static/images/product/6.png" alt="chair">                    
+                </div>
+                <h2 class="product-title">chair-6</h2>
+                <div class="price-and-cart">
+                    <span class="price">€165</span>
+                    <i class="ri-shopping-bag-line add-cart"></i>
+                </div>
+            </div>
+            <div class="product-box">
+                <div class="img-box">
+                    <img src="/static/images/product/7.png" alt="chair">                    
+                </div>
+                <h2 class="product-title">chair-7</h2>
+                <div class="price-and-cart">
+                    <span class="price">€220</span>
+                    <i class="ri-shopping-bag-line add-cart"></i>
+                </div>
+            </div>
+            <div class="product-box">
+                <div class="img-box">
+                    <img src="/static/images/product/8.png" alt="chair">                    
+                </div>
+                <h2 class="product-title">chair-8</h2>
+                <div class="price-and-cart">
+                    <span class="price">€210</span>
+                    <i class="ri-shopping-bag-line add-cart"></i>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <script src="/static/js/script.js?v=1.1"></script>
+</body>
+</html>
+

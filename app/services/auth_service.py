@@ -19,3 +19,4 @@ def userLogout() :
 # Get session
 def getSession() :
     return dataGetUserSession()
+

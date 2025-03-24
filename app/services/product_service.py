@@ -10,6 +10,8 @@ def getAllProducts() :
 def getProduct(id) :
     return dataGetProduct(id)
 
+
+
 # add new todo using data access
 def newProduct(input: Product, accessToken, refreshToken) :
     # add product (via dataaccess)
@@ -19,9 +21,11 @@ def newProduct(input: Product, accessToken, refreshToken) :
     return new_product
 
 # add new todo using data access
-def updateProduct(input: Product) :
+def updateProduct(input: Product, accessToken, refreshToken) :
     # update product
-    product = dataUpdateProduct(input)
+    product = dataUpdateProduct(input,accessToken, refreshToken)
+ 
+
 
     # return updated product
     return product
@@ -32,3 +36,13 @@ def deleteProduct(id : int, accessToken, refreshToken) :
 
 def getProductByCat(id: int) :
     return dataGetProductByCat(id)
+
+
+def get_Search_Data(query: str, search_type: str = "word"):
+    """Calls Data_Search and processes data if needed."""
+    results = Data_Search(query, search_type)
+    
+    if not results:
+        return {"message": "No products found"}
+    
+    return results  # Process data if necessary

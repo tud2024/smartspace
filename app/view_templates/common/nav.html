@@ -1,23 +1,48 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Smartspace</a>
+        <a class="navbar-brand" href="/">SmartSpace</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-                <a class="nav-link" href="/product">Product</a>
-                <a class="nav-link" href="#">Appliances</a>
-                <a class="nav-link" href="#">TV & Audio</a>
-                <a class="nav-link" href="#"">Computing</a>
-                <a class="nav-link" href="#">Gaming</a>
-                <a class="nav-link" href="#">Phones</a>
-                <a class="nav-link" href="#">Smart Tech</a>
-                <a class="nav-link" href="/auth/login/">Login</a>
-                <a class="nav-link" href="/auth/register/">register</a>
+                <a class="nav-link active" aria-current="page" href="/"></a>
+                <!-- <a class="nav-link" href="/product">Products</a>-->
+                <!-- Search Form -->
+                <form class="d-flex position-relative" 
+                      hx-get="/product/search/" 
+                      hx-target="#search-results" 
+                      hx-trigger="input">
+                    
+                    <input class="form-control me-2" id="search-input" name="query" type="search" placeholder="Search" aria-label="Search" autocomplete="off" style="width: 32rem;">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <div id="search-dropdown" class="search-dropdown position-absolute bg-white shadow-lg rounded">
+                        <div id="search-results"></div>
+                    </div>
+                </form>
             </div>
+
+           <!-- Navbar Right Section -->
+            <div class="navbar-nav ms-auto">
+                {% if request.cookies.get('user_first_name') %}
+                    <!-- Show this if logged in -->
+                    <span class="nav-link">Welcome, {{ request.cookies.get('user_first_name') }}!</span>
+                    <a class="nav-link" href="/auth/logout/"><i class="fa fa-sign-out"></i> Logout</a>
+                {% else %}
+                    <!-- Show this if not logged in -->
+                    <a class="nav-link" href="/auth/login/"><i class="fa fa-user"></i> Login</a>
+                {% endif %}
+                <a class="nav-link" href="/cart/basket"><i class="fa fa-shopping-basket"></i> Basket</a>
+            </div>
+
+            
+            
+            
+           
+            
+            
+            
         </div>
     </div>
 </nav>

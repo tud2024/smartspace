@@ -1,0 +1,27 @@
+body {
+    background-color: #f8f9fa;
+}
+.form-container {
+    max-width: 50rem;
+    margin: 5rem auto;
+    padding: 3rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.signin-legend {
+    font-size: 2rem;
+    font-weight: bold;
+    border-bottom: 0.2rem solid #ddd;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
